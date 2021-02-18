@@ -1,12 +1,12 @@
-import Navbar from './Navbar'
+import Navbar from "./Navbar";
 
 const Layout = ({ children }) => {
-   return (
-      <div className='text-white bg-black'>
-         <Navbar />
-         {children}
-      </div>
-   )
-}
+  return (
+    <div className="px-10 text-white bg-dark-c">
+      <Navbar />
+      {children}
+    </div>
+  );
+};
 
-export default Layout
+export default Layout;

@@ -11,6 +11,7 @@
    "dependencies": {
       "@types/mongoose": "^5.10.3",
       "bcryptjs": "^2.4.3",
+      "classnames": "^2.2.6",
       "cookie": "^0.4.1",
       "js-cookie": "^2.2.1",
       "jsonwebtoken": "^8.5.1",
@@ -20,6 +21,8 @@
       "react": "17.0.1",
       "react-dom": "17.0.1",
       "react-hook-form": "^6.15.1",
+      "react-icons": "^4.2.0",
+      "swr": "^0.4.2",
       "yup": "^0.32.8"
    },
    "devDependencies": {

@@ -1,4 +1,40 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600;700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+.bg-card {
+  /* background: rgb(254, 161, 60);
+  background: radial-gradient(
+    circle,
+    rgba(254, 161, 60, 1) 0%,
+    rgba(243, 220, 198, 1) 100%
+  ); */
+  background: radial-gradient(
+    circle,
+    rgb(253, 179, 104) 0%,
+    rgba(255, 241, 214, 1) 74%,
+    rgba(243, 220, 198, 1) 100%
+  );
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: rgba(255, 241, 214, 1) 74%;
+}
+/* //TODO change these all colors */
+.bg-yellow {
+  background-color: #fdc20c;
+}
+.bg-dark-c {
+  background-color: #1e2120;
+}
+.gradientImage {
+  background-image: linear-gradient(
+      135deg,
+      rgba(105, 100, 235, 0.85),
+      rgba(255, 208, 1, 0.959)
+    ),
+    url("https://static.toiimg.com/photo/64697339.cms");
+}
