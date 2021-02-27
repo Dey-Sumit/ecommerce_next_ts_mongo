@@ -5,6 +5,7 @@ import { useState } from "react";
 import { BiLoaderAlt } from "react-icons/bi";
 
 import Input from "./Input";
+import axiosInstance from "../util/axiosInstance";
 
 export default function Login() {
   // const { signIn } = useAuth()
@@ -15,21 +16,17 @@ export default function Login() {
   const { register, errors, handleSubmit } = useForm({
     mode: "onBlur",
   });
-  // // send to an action creator
-  // const signIn = async ({ email, password }) => {
-  //    try {
-  //       const res = await auth.signInWithEmailAndPassword(email, password)
-  //       dispatch(AUTH_SUCCESS, res.user)
-  //    } catch (error) {
-  //       throw error.message
-  //    }
-  // }
 
   //TODO solve type any!
   const handleClick = async (data: any) => {
     try {
       setLoading(true);
       // await signIn(data)
+      const res = await axiosInstance({
+        method: "post",
+        url: "/api/auth/login",
+        data,
+      });
       router.push("/");
     } catch (error) {
       console.log({ error });

@@ -4,9 +4,13 @@ import { BiSearchAlt } from "react-icons/bi";
 import ProductCard from "../components/ProductCard";
 import { useState } from "react";
 import classnames from "classnames";
+import axios from "axios";
+import { ProductCreate } from "../models/Product";
+import { NextPage } from "next";
+import axiosInstance from "../util/axiosInstance";
 
-const index = ({ products }) => {
-  // console.log(products)
+const index: NextPage<{ products: ProductCreate[] }> = ({ products }) => {
+  console.log(products);
 
   const getMenShoes = () => {
     setActive("Men");
@@ -53,56 +57,9 @@ const index = ({ products }) => {
           </div>
         </div>
         <div className="grid gap-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
-          <ProductCard
-            name="Nike Fly High"
-            imageUrl="/shoes/12.png"
-            price="236.00"
-          />
-          <ProductCard
-            name="Nike Fly High"
-            imageUrl="https://www.searchpng.com/wp-content/uploads/2019/01/Nike-Shoe-PNG-1024x1024.png"
-            price="236.00"
-          />
-          <ProductCard
-            name="Nike Fly High"
-            imageUrl="/shoes/11.png"
-            price="236.00"
-          />
-          <ProductCard
-            name="Nike Fly High"
-            imageUrl="/shoes/4.png"
-            price="236.00"
-          />
-          <ProductCard
-            name="Nike Fly High 2"
-            imageUrl="/shoes/5.png"
-            price="127.00"
-          />
-          <ProductCard
-            name="Nike Fly High 3 "
-            imageUrl="/shoes/6.png"
-            price="104.00"
-          />
-          <ProductCard
-            name="Nike Fly High"
-            imageUrl="/shoes/7.png"
-            price="236.00"
-          />
-          <ProductCard
-            name="Nike Fly High 2"
-            imageUrl="/shoes/8.png"
-            price="127.00"
-          />
-          <ProductCard
-            name="Nike Fly High 3 "
-            imageUrl="/shoes/9.png"
-            price="104.00"
-          />
-          <ProductCard
-            name="Nike Fly High 3 "
-            imageUrl="/shoes/10.png"
-            price="104.00"
-          />
+          {products?.map((product) => (
+            <ProductCard data={product} key={product._id} />
+          ))}
         </div>
       </div>
     </div>
@@ -112,14 +69,21 @@ const index = ({ products }) => {
 export default index;
 
 export const getStaticProps = async () => {
-  // await seedProducts()
-
-  const res = await fetch("http://localhost:3000/api/products");
-  const { products } = await res.json();
-
+  // await seedProducts();
+  let productData: any;
+  // TODO handle error ; what if the request  falls
+  try {
+    const { data } = await axiosInstance.get("/api/products");
+    // don't need to set the type here, unnecessary 😪
+    const { products }: { products: ProductCreate[] } = data;
+    productData = products;
+  } catch (error) {
+    console.log(error.message);
+    productData = [];
+  }
   return {
     props: {
-      products,
+      products: productData,
     },
   };
 };

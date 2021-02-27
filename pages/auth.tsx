@@ -4,7 +4,7 @@ import Register from "../components/Register";
 
 export default function Auth() {
   const [isLogin, setIsLogin] = useState(true);
-  console.log(isLogin);
+  console.log("rendered");
 
   //TODO font-serif globally | search better font
   return (
@@ -32,7 +32,7 @@ export default function Auth() {
               Already a member?{" "}
               <span
                 className="cursor-pointer text-green"
-                onClick={() => setIsLogin((isLogin) => !isLogin)}
+                onClick={() => setIsLogin(true)}
               >
                 Login
               </span>
@@ -42,7 +42,7 @@ export default function Auth() {
               Don't have an account yet?{" "}
               <span
                 className="cursor-pointer text-green"
-                onClick={() => setIsLogin((isLogin) => !isLogin)}
+                onClick={() => setIsLogin(false)}
               >
                 Register
               </span>

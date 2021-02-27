@@ -3,9 +3,11 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { BiLoaderAlt, BiUserCircle } from "react-icons/bi";
 import { MdEmail, MdLock } from "react-icons/md";
+import axiosInstance from "../util/axiosInstance";
 
 import Input from "./Input";
 
+//TODO use yup for the validation, reuse server side code
 export default function Register() {
   const { register, errors, handleSubmit } = useForm({
     mode: "onBlur",
@@ -18,8 +20,12 @@ export default function Register() {
   const handleClick = async (data: any) => {
     try {
       setLoading(true);
-      await signUp(data);
-      router.push("/chooseTeam");
+      const res = await axiosInstance({
+        method: "post",
+        url: "/api/auth/signup",
+        data: data,
+      });
+      router.push("/");
     } catch (error) {
       console.log({ error });
     } finally {
@@ -27,11 +33,8 @@ export default function Register() {
     }
   };
 
-  const signUp = async ({ username, email, password }) => {
+  const signUp = async ({ Name, email, password }) => {
     try {
-      //  const res = await auth.createUserWithEmailAndPassword(email, password)
-      // create profile in db
-      //  await createProfile({ uid: res.user.uid, email, username })
     } catch (error) {
       console.log({ error });
       throw error.message;
@@ -45,13 +48,13 @@ export default function Register() {
       >
         <Input
           register={register({
-            required: { value: true, message: "Username is Required" },
+            required: { value: true, message: "Name is Required" },
           })}
           Icon={BiUserCircle}
           type="text"
-          placeholder="Username"
-          name="username"
-          error={errors.username}
+          placeholder="Name"
+          name="name"
+          error={errors.Name}
         />
         <Input
           register={register({
